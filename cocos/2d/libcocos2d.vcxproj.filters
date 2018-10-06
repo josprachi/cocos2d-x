@@ -670,9 +670,6 @@
     <ClCompile Include="..\renderer\CCGLProgramStateCache.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\renderer\ccGLStateCache.cpp">
-      <Filter>renderer</Filter>
-    </ClCompile>
     <ClCompile Include="..\renderer\CCGroupCommand.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
@@ -1996,6 +1993,11 @@
     <ClCompile Include="..\ui\UIEditBox\UIEditBoxImpl-common.cpp">
       <Filter>ui\UIWidgets\EditBox</Filter>
     </ClCompile>
+    <ClCompile Include="..\base\CCController.cpp" />
+    <ClCompile Include="..\base\CCController-linux-win32.cpp" />
+    <ClCompile Include="..\base\CCEventController.cpp" />
+    <ClCompile Include="..\base\CCEventListenerController.cpp" />
+    <ClCompile Include="..\precheader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
@@ -2411,9 +2413,6 @@
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\renderer\CCGLProgramStateCache.h">
-      <Filter>renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\renderer\ccGLStateCache.h">
       <Filter>renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\renderer\CCGroupCommand.h">
@@ -3904,6 +3903,10 @@
     <ClInclude Include="..\ui\UIEditBox\UIEditBoxImpl-common.h">
       <Filter>ui\UIWidgets\EditBox</Filter>
     </ClInclude>
+    <ClInclude Include="..\base\CCController.h" />
+    <ClInclude Include="..\base\CCEventController.h" />
+    <ClInclude Include="..\base\CCEventListenerController.h" />
+    <ClInclude Include="..\precheader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\math\Mat4.inl">

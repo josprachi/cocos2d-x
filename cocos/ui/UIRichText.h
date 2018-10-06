@@ -1,5 +1,6 @@
 /****************************************************************************
  Copyright (c) 2013 cocos2d-x.org
+ Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
  
@@ -221,9 +222,10 @@ public:
      * @param opacity A opacity in GLubyte.
      * @param filePath A image file name.
      * @param url uniform resource locator
+     * @param texType texture type, may be a valid file path, or a sprite frame name
      * @return True if initialize success, false otherwise.
      */
-    bool init(int tag, const Color3B& color, GLubyte opacity, const std::string& filePath, const std::string& url = "");
+    bool init(int tag, const Color3B& color, GLubyte opacity, const std::string& filePath, const std::string& url = "", Widget::TextureResType texType = Widget::TextureResType::LOCAL);
 
     
     /**
@@ -234,9 +236,10 @@ public:
      * @param opacity A opacity in GLubyte.
      * @param filePath A image file name.
      * @param url uniform resource locator
+     * @param texType texture type, may be a valid file path, or a sprite frame name
      * @return A RichElementImage instance.
      */
-    static RichElementImage* create(int tag, const Color3B& color, GLubyte opacity, const std::string& filePath, const std::string& url = "");
+    static RichElementImage* create(int tag, const Color3B& color, GLubyte opacity, const std::string& filePath, const std::string& url = "", Widget::TextureResType texType = Widget::TextureResType::LOCAL);
 
     void setWidth(int width);
     void setHeight(int height);
@@ -244,7 +247,7 @@ public:
 protected:
     std::string _filePath;
     Rect _textureRect;
-    int _textureType;
+    Widget::TextureResType _textureType;
     friend class RichText;
     int _width;
     int _height;
@@ -558,22 +561,21 @@ protected:
     virtual void initRenderer() override;
     void pushToContainer(Node* renderer);
     void handleTextRenderer(const std::string& text, const std::string& fontName, float fontSize, const Color3B& color,
-                            GLubyte opacity, uint32_t flags, const std::string& url="",
+                            GLubyte opacity, uint32_t flags, const std::string& url = "",
                             const Color3B& outlineColor = Color3B::WHITE, int outlineSize = -1,
-                            const Color3B& shadowColor = Color3B::BLACK, const cocos2d::Size& shadowOffset = Size(2.0, -2.0), int shadowBlurRadius = 0,
+                            const Color3B& shadowColor = Color3B::BLACK, const Size& shadowOffset = Size(2.0, -2.0), int shadowBlurRadius = 0,
                             const Color3B& glowColor = Color3B::WHITE);
     void handleImageRenderer(const std::string& filePath, const Color3B& color, GLubyte opacity, int width, int height, const std::string& url);
     void handleCustomRenderer(Node* renderer);
-    void formarRenderers();
+    void formatRenderers();
     void addNewLine();
-    int findSplitPositionForWord(cocos2d::Label* label, const std::string& text);
-    int findSplitPositionForChar(cocos2d::Label* label, const std::string& text);
 	void doHorizontalAlignment(const Vector<Node*>& row, float rowWidth);
 	float stripTrailingWhitespace(const Vector<Node*>& row);
 
     bool _formatTextDirty;
     Vector<RichElement*> _richElements;
     std::vector<Vector<Node*>> _elementRenders;
+    std::vector<float> _lineHeights;
     float _leftSpaceWidth;
 
     ValueMap _defaults;             /*!< default values */

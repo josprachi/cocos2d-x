@@ -1,6 +1,7 @@
 /****************************************************************************
  Copyright (c) 2010-2012 cocos2d-x.org
- Copyright (c) 2013-2017 Chukong Technologies Inc.
+ Copyright (c) 2013-2016 Chukong Technologies Inc.
+ Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
 
  http://www.cocos2d-x.org
 
@@ -90,6 +91,11 @@ static id s_sharedDirectorCaller;
 
 - (void)appDidBecomeActive
 {
+    // initialize initLastDisplayTime, or the dt will be invalid when
+    // - the app is lauched
+    // - the app resumes from background
+    [self initLastDisplayTime];
+
     isAppActive = YES;
 }
 
@@ -100,12 +106,8 @@ static id s_sharedDirectorCaller;
 
 -(void) startMainLoop
 {
-        // Director::setAnimationInterval() is called, we should invalidate it first
+    // Director::setAnimationInterval() is called, we should invalidate it first
     [self stopMainLoop];
-    
-    // initialize initLastDisplayTime, or the dt of of first frame is invalid
-    // should init before start displayLink
-    [self initLastDisplayTime];
     
     displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self selector:@selector(doCaller:)];
     [displayLink setFrameInterval: self.interval];
